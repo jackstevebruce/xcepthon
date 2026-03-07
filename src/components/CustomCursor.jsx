@@ -5,8 +5,22 @@ const CustomCursor = () => {
   const ringRef = useRef(null);
   const [isPointer, setIsPointer] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
+  const [isLargeScreen, setIsLargeScreen] = useState(
+    () => window.innerWidth >= 768,
+  );
 
   useEffect(() => {
+    const onResize = () => {
+      setIsLargeScreen(window.innerWidth >= 768);
+    };
+
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  useEffect(() => {
+    if (!isLargeScreen) return;
+
     let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
     let ring = { x: mouse.x, y: mouse.y };
     let raf;
@@ -49,7 +63,9 @@ const CustomCursor = () => {
       window.removeEventListener("mouseup", onUp);
       cancelAnimationFrame(raf);
     };
-  }, []);
+  }, [isLargeScreen]);
+
+  if (!isLargeScreen) return null;
 
   return (
     <>
