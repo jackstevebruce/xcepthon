@@ -40,25 +40,25 @@ const Schedule = () => {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
-                            className={`relative flex items-center p-6 rounded-xl border ${item.highlight ? 'bg-gradient-to-r from-goku-orange/20 to-transparent border-goku-orange/50 shadow-[0_0_20px_rgba(255,94,0,0.15)]' : 'bg-[#1a1040]/50 border-white/5'} backdrop-blur-sm`}
+                            className={`relative flex items-center p-6 rounded-xl border ${item.highlight ? 'bg-goku-yellow border-goku-yellow shadow-[0_0_20px_rgba(216,197,173,0.4)]' : 'bg-goku-yellow/90 border-black/10'} backdrop-blur-sm`}
                         >
-                            <div className="hidden sm:block absolute left-0 top-1/2 -translate-y-1/2 w-1 h-12 bg-goku-orange rounded-r-md"></div>
+                            <div className="hidden sm:block absolute left-0 top-1/2 -translate-y-1/2 w-1 h-12 bg-goku-indigo rounded-r-md"></div>
 
                             <div className="flex-1 sm:pl-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                                 <div>
-                                    <h3 className={`font-heading text-2xl ${item.highlight ? 'text-white' : 'text-gray-200'} tracking-wide`}>
+                                    <h3 className={`font-heading text-2xl ${item.highlight ? 'text-goku-indigo' : 'text-goku-dark'} tracking-wide`}>
                                         {item.title}
                                     </h3>
-                                    <div className="flex items-center gap-3 mt-1 text-sm font-sans">
-                                        <span className="text-goku-yellow">{item.time}</span>
-                                        <span className="text-gray-500">•</span>
-                                        <span className="text-gray-400">{item.day}</span>
+                                    <div className="flex items-center gap-3 mt-1 text-sm font-sans font-bold">
+                                        <span className="text-goku-indigo">{item.time}</span>
+                                        <span className="text-goku-dark/50">•</span>
+                                        <span className="text-goku-dark/80">{item.day}</span>
                                     </div>
                                 </div>
 
                                 {item.highlight && (
                                     <div className="shrink-0">
-                                        <span className="inline-block px-3 py-1 bg-goku-orange text-white text-xs font-bold uppercase rounded-full">
+                                        <span className="inline-block px-3 py-1 bg-goku-indigo text-white text-xs font-bold uppercase rounded-full">
                                             Major Event
                                         </span>
                                     </div>

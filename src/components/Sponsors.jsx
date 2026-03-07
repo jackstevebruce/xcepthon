@@ -22,7 +22,7 @@ const Sponsors = () => {
     ];
 
     return (
-        <section id="sponsors" className="py-24 bg-[#100b20] relative border-t border-white/5">
+        <section id="sponsors" className="py-24 bg-goku-dark relative border-t border-white/5">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -31,9 +31,9 @@ const Sponsors = () => {
                     className="mb-16"
                 >
                     <h2 className="font-heading text-5xl md:text-6xl text-white mb-4 uppercase">
-                        Powered By <span className="text-white text-glow">Titans</span>
+                        Powered By <span className="text-goku-indigo">Titans</span>
                     </h2>
-                    <div className="h-1 w-24 bg-goku-orange mx-auto"></div>
+                    <div className="h-1 w-24 bg-goku-indigo mx-auto"></div>
                 </motion.div>
 
                 <div className="space-y-16">
@@ -45,7 +45,7 @@ const Sponsors = () => {
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1 }}
                         >
-                            <h3 className="font-sans text-xl text-gray-400 mb-8 uppercase tracking-[0.2em]">{tier.name}</h3>
+                            <h3 className="font-sans text-xl text-goku-indigo mb-8 uppercase tracking-[0.2em] font-bold">{tier.name}</h3>
                             <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
                                 {tier.sponsors.map((src, i) => (
                                     <div key={i} className={`grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110 cursor-pointer ${tier.size}`}>

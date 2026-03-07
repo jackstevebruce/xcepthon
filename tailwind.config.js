@@ -8,13 +8,15 @@ export default {
     extend: {
       colors: {
         goku: {
-          dark: '#100b20',
-          navy: '#1a1040',
-          orange: '#ff5e00',
-          'orange-light': '#ff7a00',
-          yellow: '#ffcc00',
-          'yellow-light': '#ffea00',
-          cyan: '#00f0ff'
+          dark: '#E15B0A', // Set dark background entirely to the requested E15B0A Orange
+          navy: '#412A6B', // Mid purple
+          indigo: '#452F7A', // Lighter purple
+          plum: '#6B406D', // Muted purple
+          orange: '#E15B0A', // NEW MAIN COLOR
+          'orange-dark': '#C03F12', // Darker rust orange
+          yellow: '#D8C5AD', // Sand/Beige color for accents
+          'yellow-light': '#FFFFFF', // Keeping white for extreme highlights
+          cyan: '#D8C5AD' // Replacing cyan with the sand color for consistency
         }
       },
       fontFamily: {

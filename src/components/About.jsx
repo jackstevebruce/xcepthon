@@ -17,7 +17,7 @@ const About = () => {
             delay: 0.4
         },
         {
-            icon: <Users size={32} className="text-goku-cyan" />,
+            icon: <Users size={32} className="text-goku-yellow" />,
             title: "Elite Network",
             desc: "Join forces with the best developers, designers, and innovators. Your team is your strongest weapon.",
             delay: 0.6
@@ -25,9 +25,7 @@ const About = () => {
     ];
 
     return (
-        <section id="about" className="relative py-24 bg-goku-navy">
-            {/* Texture overlay */}
-            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.15] mix-blend-overlay pointer-events-none"></div>
+        <section id="about" className="relative py-24 bg-goku-dark">
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="text-center max-w-3xl mx-auto mb-16">
@@ -38,7 +36,7 @@ const About = () => {
                         transition={{ duration: 0.6 }}
                         className="font-heading text-5xl md:text-6xl text-white mb-6 uppercase tracking-wide"
                     >
-                        Power <span className="text-goku-orange">Awakened</span>
+                        Power <span className="text-goku-indigo">Awakened</span>
                     </motion.h2>
                     <motion.div
                         initial={{ scaleX: 0 }}
@@ -66,13 +64,13 @@ const About = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.6, delay: card.delay }}
-                            className="group relative bg-[#1c133a] rounded-2xl p-8 border border-white/5 hover:border-goku-orange/50 transition-colors duration-300 overflow-hidden"
+                            className="group relative bg-goku-indigo rounded-2xl p-8 border border-white/5 hover:border-goku-yellow/50 transition-colors duration-300 overflow-hidden"
                         >
                             {/* Hover glow effect */}
                             <div className="absolute -inset-2 bg-gradient-to-r from-goku-orange to-goku-yellow opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500 rounded-[2rem]"></div>
 
                             <div className="relative z-10 flex flex-col h-full">
-                                <div className="w-16 h-16 rounded-xl bg-goku-dark/50 flex items-center justify-center mb-6 shadow-inner border border-white/10 group-hover:scale-110 transition-transform duration-300">
+                                <div className="w-16 h-16 rounded-xl bg-white/10 flex items-center justify-center mb-6 shadow-inner border border-white/10 group-hover:scale-110 transition-transform duration-300">
                                     {card.icon}
                                 </div>
                                 <h3 className="font-heading text-2xl text-white mb-4 tracking-wide">{card.title}</h3>
@@ -84,7 +82,7 @@ const About = () => {
                     ))}
                 </div>
             </div>
-        </section>
+        </section >
     );
 };
 

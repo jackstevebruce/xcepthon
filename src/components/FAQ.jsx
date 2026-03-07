@@ -29,7 +29,7 @@ const FAQ = () => {
     ];
 
     return (
-        <section className="py-24 bg-goku-navy relative">
+        <section className="py-24 bg-goku-dark relative">
             <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="text-center mb-16">
                     <motion.h2
@@ -40,7 +40,7 @@ const FAQ = () => {
                     >
                         Intel & <span className="text-gray-400">Queries</span>
                     </motion.h2>
-                    <div className="h-1 w-24 bg-gray-500 mx-auto"></div>
+                    <div className="h-1 w-24 bg-goku-yellow mx-auto"></div>
                 </div>
 
                 <div className="space-y-4">
@@ -51,7 +51,7 @@ const FAQ = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1 }}
-                            className="border border-white/10 bg-[#1a1040]/50 rounded-xl overflow-hidden backdrop-blur-sm"
+                            className="border border-white/20 bg-goku-indigo/80 rounded-xl overflow-hidden backdrop-blur-sm shadow-md"
                         >
                             <button
                                 onClick={() => setActiveIndex(activeIndex === index ? null : index)}
@@ -62,7 +62,7 @@ const FAQ = () => {
                                     animate={{ rotate: activeIndex === index ? 180 : 0 }}
                                     transition={{ duration: 0.3 }}
                                 >
-                                    <ChevronDown className="text-goku-orange" />
+                                    <ChevronDown className="text-white" />
                                 </motion.div>
                             </button>
 

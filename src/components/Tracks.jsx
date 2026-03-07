@@ -35,7 +35,7 @@ const Tracks = () => {
     ];
 
     return (
-        <section id="tracks" className="py-24 bg-[#100b20] relative">
+        <section id="tracks" className="py-24 bg-goku-dark relative">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="text-center mb-16">
                     <motion.h2
@@ -44,9 +44,9 @@ const Tracks = () => {
                         viewport={{ once: true }}
                         className="font-heading text-5xl md:text-6xl text-white mb-4 uppercase"
                     >
-                        Choose Your <span className="text-goku-cyan">Domain</span>
+                        Choose Your <span className="text-goku-indigo">Domain</span>
                     </motion.h2>
-                    <div className="h-1 w-24 bg-goku-cyan mx-auto mb-6"></div>
+                    <div className="h-1 w-24 bg-goku-yellow mx-auto mb-6"></div>
                     <p className="text-gray-400 font-sans max-w-2xl mx-auto">
                         Pick a track, assemble your squad, and build a project that challenges the status quo.
                     </p>
@@ -66,10 +66,9 @@ const Tracks = () => {
                             {/* Background gradient card */}
                             <div className={`absolute inset-0 bg-gradient-to-br ${track.color} rounded-2xl opacity-70 blur-sm flex group-hover:opacity-100 transition-opacity duration-300`}></div>
 
-                            {/* Front Card */}
-                            <div className="relative h-full bg-[#1a1040] rounded-2xl p-8 border border-white/10 overflow-hidden flex flex-col">
-                                <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${track.color} p-0.5 mb-6`}>
-                                    <div className="w-full h-full bg-[#1a1040] rounded-[14px] flex items-center justify-center">
+                            <div className="relative h-full bg-goku-indigo rounded-2xl p-8 border border-white/20 overflow-hidden flex flex-col">
+                                <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${track.color} p-0.5 mb-6 shadow-lg`}>
+                                    <div className="w-full h-full bg-goku-indigo rounded-[14px] flex items-center justify-center">
                                         {track.icon}
                                     </div>
                                 </div>
