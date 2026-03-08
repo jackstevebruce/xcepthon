@@ -2,8 +2,57 @@ import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Trophy, Medal, Award, Zap } from "lucide-react";
 import gokuImg from "../assets/goku.png";
+import gokuSound from "../assets/goku-sound.mp3";
 
 const PrizePool = () => {
+  const audioRef = useRef(new Audio(gokuSound));
+  const hasPlayed = useRef(false);
+
+  // Global Audio Unblocker: Priming the audio on the first user interaction
+  React.useEffect(() => {
+    const unlockAudio = () => {
+      // We don't play the sound, just "touch" it during a user gesture to unlock it
+      const audio = audioRef.current;
+      audio.play().then(() => {
+        audio.pause();
+        audio.currentTime = 0;
+      }).catch(() => {
+        // Silently fail if they haven't interacted enough yet
+      });
+      
+      window.removeEventListener("mousedown", unlockAudio);
+      window.removeEventListener("touchstart", unlockAudio);
+      window.removeEventListener("keydown", unlockAudio);
+    };
+
+    window.addEventListener("mousedown", unlockAudio);
+    window.addEventListener("touchstart", unlockAudio);
+    window.addEventListener("keydown", unlockAudio);
+
+    return () => {
+      window.removeEventListener("mousedown", unlockAudio);
+      window.removeEventListener("touchstart", unlockAudio);
+      window.removeEventListener("keydown", unlockAudio);
+    };
+  }, []);
+
+  const playGokuSound = () => {
+    if (hasPlayed.current) return;
+    
+    const audio = audioRef.current;
+    audio.volume = 0.5;
+    audio.currentTime = 0;
+    
+    audio.play().then(() => {
+      hasPlayed.current = true; 
+      setTimeout(() => {
+        audio.pause();
+      }, 5000);
+    }).catch((err) => {
+      console.warn("Retrying sound on next view because playback was blocked.", err);
+    });
+  };
+
   const sectionRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -51,7 +100,8 @@ const PrizePool = () => {
             className="relative lg:w-[260px] flex-shrink-0 z-20"
             initial={{ x: -500, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: false, amount: 0.3 }}
+            onViewportEnter={playGokuSound}
             transition={{
               type: "spring",
               stiffness: 100,
