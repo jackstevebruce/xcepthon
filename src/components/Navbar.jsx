@@ -37,22 +37,21 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-goku-dark/90 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.5)] border-b border-white/5"
-          : "bg-transparent"
-      }`}
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled
+        ? "bg-goku-dark/95 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.3)] border-b border-white/10"
+        : "bg-transparent"
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center gap-2">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-goku-orange to-goku-yellow flex items-center justify-center p-0.5">
+            <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center p-0.5">
               <div className="w-full h-full bg-goku-dark rounded-full flex items-center justify-center">
                 <span className="font-heading text-xl text-white">XC</span>
               </div>
             </div>
-            <span className="font-heading text-2xl tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-goku-orange to-goku-yellow">
+            <span className="font-heading text-2xl tracking-wider text-white">
               XCEPTHON
             </span>
           </div>
@@ -65,10 +64,10 @@ const Navbar = () => {
                   key={link.name}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className="text-gray-300 hover:text-white font-sans text-sm tracking-wide uppercase transition-colors relative group cursor-pointer"
+                  className="text-white/80 hover:text-white font-sans text-sm tracking-wide uppercase transition-colors relative group"
                 >
                   {link.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-goku-orange transition-all duration-300 group-hover:w-full"></span>
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-goku-indigo transition-all duration-300 group-hover:w-full"></span>
                 </a>
               ))}
             </div>
@@ -76,9 +75,9 @@ const Navbar = () => {
 
           {/* CTA Button */}
           <div className="hidden md:flex items-center">
-            <button className="relative px-6 py-2 bg-goku-orange/10 border border-goku-orange text-goku-orange hover:bg-goku-orange hover:text-white font-accent tracking-widest text-sm transition-all duration-300 group overflow-hidden">
+            <button className="relative px-6 py-2 bg-goku-indigo/20 border border-goku-indigo text-white hover:bg-goku-indigo font-accent tracking-widest text-sm transition-all duration-300 group overflow-hidden rounded-full">
               <span className="relative z-10">REGISTER NOW</span>
-              <div className="absolute inset-0 h-full w-full bg-goku-orange transform scale-x-0 origin-left transition-transform duration-300 ease-out group-hover:scale-x-100 opacity-20"></div>
+              <div className="absolute inset-0 h-full w-full bg-goku-indigo transform scale-x-0 origin-left transition-transform duration-300 ease-out group-hover:scale-x-100 opacity-20"></div>
             </button>
           </div>
 

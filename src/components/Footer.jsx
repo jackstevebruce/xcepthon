@@ -3,9 +3,9 @@ import { Github, Twitter, Linkedin, Mail } from 'lucide-react';
 
 const Footer = () => {
     return (
-        <footer className="bg-goku-dark pt-16 pb-8 border-t border-white/10 relative overflow-hidden">
+        <footer className="bg-goku-indigo pt-16 pb-8 border-t border-white/10 relative overflow-hidden">
             {/* Decorative effect */}
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-goku-orange/5 blur-[150px] pointer-events-none"></div>
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-goku-yellow/10 blur-[150px] pointer-events-none"></div>
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
@@ -19,20 +19,20 @@ const Footer = () => {
                             Where Exceptions Become Innovation. The ultimate 48-hour battleground for developers, designers, and visionaries.
                         </p>
                         <div className="flex space-x-4 text-gray-400">
-                            <a href="#" className="hover:text-goku-orange transition-colors"><Twitter size={24} /></a>
-                            <a href="#" className="hover:text-goku-orange transition-colors"><Linkedin size={24} /></a>
-                            <a href="#" className="hover:text-goku-orange transition-colors"><Github size={24} /></a>
-                            <a href="#" className="hover:text-goku-orange transition-colors"><Mail size={24} /></a>
+                            <a href="#" className="hover:text-goku-yellow transition-colors"><Twitter size={24} /></a>
+                            <a href="#" className="hover:text-goku-yellow transition-colors"><Linkedin size={24} /></a>
+                            <a href="#" className="hover:text-goku-yellow transition-colors"><Github size={24} /></a>
+                            <a href="#" className="hover:text-goku-yellow transition-colors"><Mail size={24} /></a>
                         </div>
                     </div>
 
                     <div>
                         <h4 className="font-heading text-xl text-white mb-4 tracking-wide">Quick Links</h4>
                         <ul className="space-y-2 font-sans text-gray-400">
-                            <li><a href="#about" className="hover:text-goku-cyan transition-colors">About</a></li>
-                            <li><a href="#tracks" className="hover:text-goku-cyan transition-colors">Tracks</a></li>
-                            <li><a href="#schedule" className="hover:text-goku-cyan transition-colors">Schedule</a></li>
-                            <li><a href="#sponsors" className="hover:text-goku-cyan transition-colors">Sponsors</a></li>
+                            <li><a href="#about" className="hover:text-goku-yellow transition-colors">About</a></li>
+                            <li><a href="#tracks" className="hover:text-goku-yellow transition-colors">Tracks</a></li>
+                            <li><a href="#schedule" className="hover:text-goku-yellow transition-colors">Schedule</a></li>
+                            <li><a href="#sponsors" className="hover:text-goku-yellow transition-colors">Sponsors</a></li>
                         </ul>
                     </div>
 

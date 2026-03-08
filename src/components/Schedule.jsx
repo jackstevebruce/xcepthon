@@ -1,7 +1,19 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 const Schedule = () => {
+    const sectionRef = useRef(null);
+    const { scrollYProgress } = useScroll({
+        target: sectionRef,
+        offset: ["start end", "end center"]
+    });
+
+    const headerY = useTransform(scrollYProgress, [0, 0.5], [100, 0]);
+    const headerOpacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
+
+    // This creates a timeline that physically draws itself down as you scroll
+    const timelineScaleY = useTransform(scrollYProgress, [0.2, 0.9], [0, 1]);
+
     const scheduleData = [
         { time: "09:00 AM", title: "Check-in & Breakfast", day: "Day 1 (Mar 23)" },
         { time: "10:30 AM", title: "Opening Ceremony", day: "Day 1 (Mar 23)" },
@@ -15,57 +27,77 @@ const Schedule = () => {
     ];
 
     return (
-        <section id="schedule" className="py-24 bg-goku-dark relative overflow-hidden">
-            {/* Decorative aura */}
-            <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-goku-yellow/10 rounded-full blur-[100px] pointer-events-none"></div>
+        <section id="schedule" ref={sectionRef} className="py-24 bg-goku-dark relative overflow-hidden">
+            {/* Scroll-linked flowing aura */}
+            <motion.div 
+                style={{ 
+                    y: useTransform(scrollYProgress, [0, 1], [-200, 500]),
+                    scale: useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1.2, 0.8])
+                }}
+                className="absolute right-0 top-0 w-[500px] h-[500px] bg-goku-yellow/10 rounded-full blur-[100px] pointer-events-none"
+            />
 
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div className="text-center mb-16">
-                    <motion.h2
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        className="font-heading text-5xl md:text-6xl text-white mb-4 uppercase"
-                    >
-                        The <span className="text-goku-yellow text-glow-yellow">Saga</span>
-                    </motion.h2>
+                <motion.div style={{ y: headerY, opacity: headerOpacity }} className="text-center mb-16">
+                    <h2 className="font-heading text-5xl md:text-6xl text-white mb-4 uppercase">
+                        The <span className="text-orange-700 ">Saga</span>
+                    </h2>
                     <p className="text-gray-400 font-sans tracking-widest uppercase text-sm">Follow the timeline of battle</p>
-                </div>
+                </motion.div>
 
-                <div className="space-y-8">
-                    {scheduleData.map((item, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, x: -50 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
-                            className={`relative flex items-center p-6 rounded-xl border ${item.highlight ? 'bg-gradient-to-r from-goku-orange/20 to-transparent border-goku-orange/50 shadow-[0_0_20px_rgba(255,94,0,0.15)]' : 'bg-[#1a1040]/50 border-white/5'} backdrop-blur-sm`}
-                        >
-                            <div className="hidden sm:block absolute left-0 top-1/2 -translate-y-1/2 w-1 h-12 bg-goku-orange rounded-r-md"></div>
+                <div className="relative space-y-8 pl-4 sm:pl-0">
+                    {/* The dynamic fluid timeline line */}
+                    <div className="hidden sm:block absolute left-0 top-0 bottom-0 w-1 bg-white/5 rounded-full overflow-hidden">
+                        <motion.div 
+                            style={{ 
+                                scaleY: timelineScaleY,
+                                transformOrigin: "top"
+                            }} 
+                            className="w-full h-full bg-goku-indigo shadow-[0_0_15px_rgba(69,47,122,0.8)]"
+                        />
+                    </div>
 
-                            <div className="flex-1 sm:pl-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                                <div>
-                                    <h3 className={`font-heading text-2xl ${item.highlight ? 'text-white' : 'text-gray-200'} tracking-wide`}>
-                                        {item.title}
-                                    </h3>
-                                    <div className="flex items-center gap-3 mt-1 text-sm font-sans">
-                                        <span className="text-goku-yellow">{item.time}</span>
-                                        <span className="text-gray-500">•</span>
-                                        <span className="text-gray-400">{item.day}</span>
+                    {scheduleData.map((item, index) => {
+                        // Calculate staggered appearance based on index
+                        const start = 0.2 + (index * 0.05);
+                        const end = start + 0.1;
+                        // eslint-disable-next-line react-hooks/rules-of-hooks
+                        const itemX = useTransform(scrollYProgress, [start, end], [100, 0]);
+                        // eslint-disable-next-line react-hooks/rules-of-hooks
+                        const itemOpacity = useTransform(scrollYProgress, [start, end], [0, 1]);
+
+                        return (
+                            <motion.div
+                                key={index}
+                                style={{ x: itemX, opacity: itemOpacity }}
+                                className={`relative flex items-center p-6 rounded-xl border ${item.highlight ? 'bg-goku-yellow border-goku-yellow shadow-[0_0_20px_rgba(216,197,173,0.4)]' : 'bg-goku-yellow/90 border-black/10'} backdrop-blur-sm`}
+                            >
+                                <div className="hidden sm:block absolute left-[-4px] top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-goku-indigo border-2 border-goku-dark shadow-[0_0_10px_rgba(69,47,122,0.8)] z-10"></div>
+                                <div className="hidden sm:block absolute left-0 top-1/2 -translate-y-1/2 w-3 h-1 bg-goku-indigo"></div>
+
+                                <div className="flex-1 sm:pl-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                                    <div>
+                                        <h3 className={`font-heading text-2xl ${item.highlight ? 'text-goku-indigo' : 'text-goku-dark'} tracking-wide`}>
+                                            {item.title}
+                                        </h3>
+                                        <div className="flex items-center gap-3 mt-1 text-sm font-sans font-bold">
+                                            <span className="text-goku-indigo">{item.time}</span>
+                                            <span className="text-goku-dark/50">•</span>
+                                            <span className="text-goku-dark/80">{item.day}</span>
+                                        </div>
                                     </div>
+
+                                    {item.highlight && (
+                                        <div className="shrink-0">
+                                            <span className="inline-block px-3 py-1 bg-goku-indigo text-white text-xs font-bold uppercase rounded-full">
+                                                Major Event
+                                            </span>
+                                        </div>
+                                    )}
                                 </div>
-
-                                {item.highlight && (
-                                    <div className="shrink-0">
-                                        <span className="inline-block px-3 py-1 bg-goku-orange text-white text-xs font-bold uppercase rounded-full">
-                                            Major Event
-                                        </span>
-                                    </div>
-                                )}
-                            </div>
-                        </motion.div>
-                    ))}
+                            </motion.div>
+                        );
+                    })}
                 </div>
             </div>
         </section>
