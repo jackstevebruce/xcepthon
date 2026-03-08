@@ -1,12 +1,13 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Trophy, Medal, Award, Zap } from "lucide-react";
+import gokuImg from "../assets/goku.png";
 
 const PrizePool = () => {
   const sectionRef = useRef(null);
   const { scrollYProgress } = useScroll({
-      target: sectionRef,
-      offset: ["start end", "end center"]
+    target: sectionRef,
+    offset: ["start end", "end center"]
   });
 
   // Background glow paralax movements
@@ -16,7 +17,7 @@ const PrizePool = () => {
 
   // Main Card Parallax
   const leftCardY = useTransform(scrollYProgress, [0.1, 0.8], [150, 0]);
-  
+
   // Right Stacked Cards Parallax
   const rightCard1Y = useTransform(scrollYProgress, [0.2, 0.8], [200, 0]);
   const rightCard2Y = useTransform(scrollYProgress, [0.3, 0.9], [250, 0]);
@@ -29,13 +30,13 @@ const PrizePool = () => {
     >
       {/* Background ambient scroll-linked glows */}
       <div className="absolute inset-0 pointer-events-none">
-        <motion.div 
+        <motion.div
           style={{ y: bg1Y }}
-          className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-goku-orange/10 blur-[120px]" 
+          className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-goku-orange/10 blur-[120px]"
         />
-        <motion.div 
+        <motion.div
           style={{ y: bg2Y, rotate: bg2Rotate }}
-          className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-cyan-500/8 blur-[120px]" 
+          className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-cyan-500/8 blur-[120px]"
         />
         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 mix-blend-overlay" />
       </div>
@@ -43,73 +44,97 @@ const PrizePool = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* ── LAYOUT: mirrors the reference — tall left card | center heading | right grid ── */}
         <div className="flex flex-col lg:flex-row gap-6 items-stretch min-h-[520px]">
-          {/* ── LEFT: Total Prize Pool Card ─────────────────────────── */}
+
+          {/* ── LEFT: Total Prize Pool Card (Now with Goku Push) ─────────────────────────── */}
           <motion.div
             style={{ y: leftCardY }}
-            className="lg:w-[260px] flex-shrink-0 relative rounded-3xl overflow-hidden flex flex-col justify-between p-8 min-h-[480px]"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1 }}
+            className="relative lg:w-[260px] flex-shrink-0 z-20"
+            initial={{ x: -500, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{
+              type: "spring",
+              stiffness: 100,
+              damping: 20,
+              mass: 1.2,
+              delay: 0.1
+            }}
           >
-            {/* dynamic inline style merged with fixed tailwind background */}
-            <div className="absolute inset-0 pointer-events-none" style={{
-              background: "linear-gradient(160deg, #1a0a00 0%, #ff5e00 60%, #ff9a00 100%)",
-              boxShadow: "0 0 60px rgba(255,94,0,0.4), 0 0 120px rgba(255,94,0,0.15)",
-              zIndex: -1
-            }}></div>
-
-            {/* Grid pattern overlay */}
-            <div
-              className="absolute inset-0 opacity-20 pointer-events-none"
+            {/* Goku Image pushing the card */}
+            <img
+              src={gokuImg}
+              alt="Goku"
+              className="hidden lg:block absolute z-30 object-contain drop-shadow-[0_0_20px_rgba(255,94,0,0.6)]"
               style={{
-                backgroundImage:
-                  "linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px)",
-                backgroundSize: "32px 32px",
-                zIndex: -1
+                height: "500px",
+                left: "-240px",
+                top: "50%",
+                transform: "translateY(-50%)",
+                pointerEvents: "none",
               }}
             />
 
-            {/* Top label */}
-            <div className="relative z-10">
-              <p className="font-sans text-xs text-white/70 tracking-[0.2em] uppercase border border-white/20 rounded-full px-3 py-1 inline-block mb-2">
-                Total Prize Pool
-              </p>
-            </div>
+            {/* Your EXACT original left card, now inside the animated wrapper */}
+            <div className="relative rounded-3xl overflow-hidden flex flex-col justify-between p-8 min-h-[480px] w-full h-full">
+              {/* dynamic inline style merged with fixed tailwind background */}
+              <div className="absolute inset-0 pointer-events-none" style={{
+                background: "linear-gradient(160deg, #1a0a00 0%, #ff5e00 60%, #ff9a00 100%)",
+                boxShadow: "0 0 60px rgba(255,94,0,0.4), 0 0 120px rgba(255,94,0,0.15)",
+                zIndex: -1
+              }}></div>
 
-            {/* Big number */}
-            <div className="relative z-10 my-auto py-8">
-              <motion.p
-                style={{ scale: useTransform(scrollYProgress, [0.3, 0.7], [0.8, 1]) }}
-                className="font-heading text-7xl text-white leading-none"
-                initial={{ textShadow: "0 0 0px rgba(255,255,255,0)" }}
-                animate={{ textShadow: "0 0 40px rgba(255,255,255,0.4)" }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-              >
-                ₹30K
-              </motion.p>
-              <p className="font-sans text-sm text-white/60 mt-2 tracking-widest">
-                prizes in total
-              </p>
-            </div>
+              {/* Grid pattern overlay */}
+              <div
+                className="absolute inset-0 opacity-20 pointer-events-none"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px)",
+                  backgroundSize: "32px 32px",
+                  zIndex: -1
+                }}
+              />
 
-            {/* Branding bottom */}
-            <div className="relative z-10 flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-white/10 border border-white/20 flex items-center justify-center">
-                <Zap size={14} className="text-white" />
+              {/* Top label */}
+              <div className="relative z-10">
+                <p className="font-sans text-xs text-white/70 tracking-[0.2em] uppercase border border-white/20 rounded-full px-3 py-1 inline-block mb-2">
+                  Total Prize Pool
+                </p>
               </div>
-              <span className="font-heading text-white text-lg tracking-widest">
-                XCEPTHON <span className="text-white/60">'26</span>
-              </span>
+
+              {/* Big number */}
+              <div className="relative z-10 my-auto py-8">
+                <motion.p
+                  style={{ scale: useTransform(scrollYProgress, [0.3, 0.7], [0.8, 1]) }}
+                  className="font-heading text-7xl text-white leading-none"
+                  initial={{ textShadow: "0 0 0px rgba(255,255,255,0)" }}
+                  animate={{ textShadow: "0 0 40px rgba(255,255,255,0.4)" }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                >
+                  ₹30K
+                </motion.p>
+                <p className="font-sans text-sm text-white/60 mt-2 tracking-widest">
+                  prizes in total
+                </p>
+              </div>
+
+              {/* Branding bottom */}
+              <div className="relative z-10 flex items-center gap-2">
+                <div className="w-8 h-8 rounded-full bg-white/10 border border-white/20 flex items-center justify-center">
+                  <Zap size={14} className="text-white" />
+                </div>
+                <span className="font-heading text-white text-lg tracking-widest">
+                  XCEPTHON <span className="text-white/60">'26</span>
+                </span>
+              </div>
             </div>
           </motion.div>
 
           {/* ── CENTER: Heading ──────────────────────────────────────── */}
           <div className="flex-1 flex flex-col justify-center lg:px-8 text-center lg:text-left">
             <motion.div
-              style={{ 
-                  opacity: useTransform(scrollYProgress, [0.1, 0.5], [0, 1]),
-                  y: useTransform(scrollYProgress, [0.1, 0.5], [50, 0])
+              style={{
+                opacity: useTransform(scrollYProgress, [0.1, 0.5], [0, 1]),
+                y: useTransform(scrollYProgress, [0.1, 0.5], [50, 0])
               }}
             >
               <p className="font-accent text-goku-orange tracking-[0.3em] uppercase text-sm mb-3">
@@ -144,12 +169,12 @@ const PrizePool = () => {
               viewport={{ once: true }}
               transition={{ duration: 1 }}
             >
-                <div className="absolute inset-0 pointer-events-none" style={{
-                    background: "linear-gradient(140deg, #111130 0%, #1a1a45 100%)",
-                    border: "1px solid rgba(255,255,255,0.08)",
-                    boxShadow: "0 0 30px rgba(34,211,238,0.08)",
-                    zIndex: -1
-                }}></div>
+              <div className="absolute inset-0 pointer-events-none" style={{
+                background: "linear-gradient(140deg, #111130 0%, #1a1a45 100%)",
+                border: "1px solid rgba(255,255,255,0.08)",
+                boxShadow: "0 0 30px rgba(34,211,238,0.08)",
+                zIndex: -1
+              }}></div>
               {/* Zigzag / chevron pattern overlay */}
               <div
                 className="absolute inset-0 opacity-[0.04] pointer-events-none"
@@ -215,12 +240,12 @@ const PrizePool = () => {
               transition={{ duration: 1 }}
               className="relative rounded-2xl overflow-hidden p-6 flex-1 flex flex-col justify-between"
             >
-                <div className="absolute inset-0 pointer-events-none" style={{
-                    background: "linear-gradient(135deg, #1a1200 0%, #332800 50%, #1a1200 100%)",
-                    border: "1px solid rgba(255,180,0,0.15)",
-                    boxShadow: "0 0 30px rgba(255,160,0,0.1)",
-                    zIndex: -1
-                }}></div>
+              <div className="absolute inset-0 pointer-events-none" style={{
+                background: "linear-gradient(135deg, #1a1200 0%, #332800 50%, #1a1200 100%)",
+                border: "1px solid rgba(255,180,0,0.15)",
+                boxShadow: "0 0 30px rgba(255,160,0,0.1)",
+                zIndex: -1
+              }}></div>
               <p className="font-accent text-xs tracking-[0.3em] uppercase text-yellow-500/70 mb-3 relative z-10">
                 Our Sponsor
               </p>
